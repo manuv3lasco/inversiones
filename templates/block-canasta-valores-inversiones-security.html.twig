@@ -1,0 +1,66 @@
+{% if canasta %}
+<div class="" id="modal-canasta_valores">
+  <div class="c-modal__container c-modal__container--big">
+
+    <h3 class="o-title o-title--subtitle">Canasta de Valores
+      <a class="c-modal__close" href="#"><i class="fa fa-times-circle"></i></a>
+    </h3>
+
+    <div class=" c-modal__scroll js-c-modal__scroll" >
+      <div class="row " >
+        <div class="col-12">
+            {% if canasta.CanastaAporteValores.CanastaVC %}
+          <table class="c-table c-table--basic c-table--responsive">
+
+            <thead class="c-table__head">
+            <tr>
+              <th class="u-text_center">Serie</th>
+              <th class="u-text_center">Cuotas</th>
+            </tr>
+            </thead>
+            <tbody class="c-table__body">
+
+            {% for val in canasta.CanastaAporteValores.CanastaVC %}
+              <tr>
+
+                <td class="u-text_center">{{ val.Glosacuota }}</td>
+                <td class="u-text_center">{{ val.Cuotas }}</td>
+              </tr>
+            {% endfor %}
+
+            </tbody>
+          </table>
+            {% endif %}
+
+          {% if canasta.CanastaAporteValores.Canasta %}
+
+          <h3 class="o-title o-title--subtitle u-mt30">CANASTA INDEX FUND CHILE</h3>
+
+          <table class="c-table c-table--basic c-table--responsive">
+
+            <thead class="c-table__head">
+            <tr>
+              <th class="u-text_left">Nemo</th>
+              <th class="u-text_left">Nombre</th>
+              <th class="u-text_center">% Cartera</th>
+              <th class="u-text_center">Canasta</th>
+            </tr>
+            </thead>
+            <tbody class="c-table__body">
+            {% for key, val in canasta.CanastaAporteValores.Canasta %}
+            <tr>
+              <td class="u-text_left">{{ val.Instrumento }}</td>
+              <td class="u-text_left">{{ val.Razon_Social }}</td>
+              <td class="u-text_right">{{ val.Cartera }}%</td>
+              <td class="u-text_right">{{ val.Canasta|number_format(0, '.', '.') }}</td>
+            </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+            {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endif %}

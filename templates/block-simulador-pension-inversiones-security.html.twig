@@ -1,0 +1,79 @@
+<div class="c-simulation">
+  <h2>Simula ahora tu pensión</h2>
+  <form id="apv_simulator_now" action="#">
+
+    <!-- step 1 -->
+    <div class="c-simulation__sentence">Me llamo
+      <input type="text" name="name" class="o-form__input-inline u-w110 js-simulation-01-input ">soy
+      <div class="o-dropdown o-dropdown--inline">
+        <select name="Sexo" class="o-dropdown__select u-w47p js-simulation-01-input">
+          <option value="null"></option>
+          <option class="o-dropdown__option" value="masculino">Hombre</option>
+          <option class="o-dropdown__option" value="femenino">Mujer</option>
+        </select>
+      </div>y tengo
+      <input type="number" name="years" class="o-form__input-inline u-w50 js-simulation-01-input js-simulation-positive-number">años
+    </div>
+    <div  class="c-simulation__sentence">Actualmente mi renta mensual bruta es de $
+      <input type="text" name="RentaMensualBruta" class="o-form__input-inline u-w130 js-amount js-simulation-01-input" onkeypress="return isNumber(event)"> al mes,
+    </div>
+    <div class="c-simulation__sentence">y mi renta promedio de los últimos 10 años es de aproximadamente $
+      <input type="text" name="RentaPromedioMensual" class="o-form__input-inline u-w160 js-amount js-simulation-01-input" onkeypress="return isNumber(event)">.
+    </div>
+    <div class="c-simulation__sentence">Me gustaría ahorrar $
+      <input type="text" name="SaldoApv" class="o-form__input-inline u-w160 js-amount js-simulation-01-input " onkeypress="return isNumber(event)">mensualmente en APV.
+    </div>
+
+    <!-- step 2 -->
+    <div class="c-simulation__sentence js-simulation-02">El saldo actual en mi AFP es de $
+      <input type="text" name="CuentaCapitalizacion" class="o-form__input-inline u-w160 js-amount" value="" onkeypress="return isNumber(event)">
+    </div>
+
+    <!-- step 3 -->
+    <div class="c-simulation__sentence js-simulation-03">¿Tienes APV?
+      <div class="o-dropdown o-dropdown--inline">
+        <select name="apv" class="o-dropdown__select u-w47p js-simulation-03-select">
+          <option value="empty"> </option>
+          <option class="o-dropdown__option" value="1">Si</option>
+          <option class="o-dropdown__option" value="0">No</option>
+        </select>
+      </div>
+      <div class="amount js-amount-03">El saldo es $
+        <input type="text" value="" name="SaldoCuentaApv" class="o-form__input-inline u-w160 js-amount js-simulation-03-input" onkeypress="return isNumber(event)">
+      </div>
+    </div>
+
+    <!-- step 4 -->
+    <div class="c-simulation__sentence js-simulation-04">¿Tienes Depósitos convenidos?
+      <div class="o-dropdown o-dropdown--inline">
+        <select name="deposits" class="o-dropdown__select u-w47p js-simulation-04-select">
+          <option value="empty"> </option>
+          <option class="o-dropdown__option" value="1">Si</option>
+          <option class="o-dropdown__option" value="0">No</option>
+        </select>
+      </div>
+      <div class="amount js-amount-04">El saldo es $
+        <input type="text" name="SaldoDepositosConvenidos" class="o-form__input-inline u-w160 js-amount js-simulation-04-input" value="" onkeypress="return isNumber(event)">
+      </div>
+    </div>
+
+    <!-- step 5 -->
+    <div class="c-simulation__sentence js-simulation-05">¿Tienes Bono de Reconocimiento?
+      <div class="o-dropdown o-dropdown--inline">
+        <select name="bond" class="o-dropdown__select u-w47p js-simulation-05-select">
+          <option value="empty"> </option>
+          <option class="o-dropdown__option" value="1">Si</option>
+          <option class="o-dropdown__option" value="0">No</option>
+        </select>
+      </div>
+      <div class="amount js-amount-05"> El saldo es $
+        <input type="text" name="ValorNominalBonoReconocimiento" class="o-form__input-inline u-w160 js-amount js-simulation-05-input" value="" onkeypress="return isNumber(event)">
+      </div>
+    </div>
+
+    <!-- final -->
+    <div class="c-simulation__action"> <a class="o-btn o-btn--primary o-btn--disable js-simulation-btn" service="/simulador-de-pension/resultado">Simular Pensión</a></div>
+  </form>
+</div>
+
+<div id="result"></div>

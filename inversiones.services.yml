@@ -1,0 +1,7 @@
+services:
+  inversiones.services:
+    class: Drupal\inversiones\Services\WebServices
+  http_response_headers:
+    class: '\Drupal\inversiones\EventSubscriber\AddHTTPHeaders'
+    tags:
+      - { name: 'event_subscriber' }

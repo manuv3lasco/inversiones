@@ -1,0 +1,17 @@
+base:
+  css:
+    layout:
+      css/datepicker/datepicker3.css: { }
+    theme:
+      css/main.min.css: {}
+      css/custom.css: {}
+  js:
+    js/datepicker/bootstrap-datepicker.js: { }
+    js/datepicker/locales/bootstrap-datepicker.es.js: { }
+    js/script.js: {}
+    js/zhighcharts.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal
+    - core/drupalSettings
+    - core/jquery.once

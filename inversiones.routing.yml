@@ -1,0 +1,44 @@
+inversiones.resultado_perfil_inversionista:
+  path: '/descubre-perfil-inversionista/resultado'
+  defaults:
+    _controller: '\Drupal\inversiones\Controller\PerfilInversionista::resultado'
+    _title: 'Perfil inversionista resultado'
+  requirements:
+    _permission: 'access content'
+
+inversiones.email_perfil_inversionista:
+  path: '/descubre-perfil-inversionista/email'
+  defaults:
+    _controller: '\Drupal\inversiones\Controller\PerfilInversionista::email'
+    _title: 'Perfil inversionista email'
+  requirements:
+    _permission: 'access content'
+
+inversiones.resultado.simulador.pension:
+  path: '/simulador-de-pension/resultado'
+  defaults:
+    _controller: '\Drupal\inversiones\Controller\SimuladorPension::resultado'
+    _title: 'Simulador pension resultado'
+  requirements:
+    _permission: 'access content'
+
+inversiones.api.ffmm:
+  path: '/api/ffmm/{fid}/folleto_informativo'
+  defaults:
+    _controller: '\Drupal\inversiones\Controller\ApiFondoMutuo::folleto_informativo'
+  requirements:
+    _permission: 'access content'
+
+inversiones.api.patentes:
+  path: '/api/patentes/{name}'
+  defaults:
+    _controller: '\Drupal\inversiones\Controller\ApiPatentes::archivo'
+  requirements:
+    _permission: 'access content'
+
+inversiones.api.anexos:
+  path: '/api/anexos/{name}'
+  defaults:
+    _controller: '\Drupal\inversiones\Controller\ApiAnexos::archivo'
+  requirements:
+    _permission: 'access content'

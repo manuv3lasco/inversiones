@@ -1,0 +1,153 @@
+<?php
+
+/**
+ * @file
+ * A description of what your module does.
+ */
+
+/**
+ * Implements hook_mail().
+ */
+function inversiones_mail($key, &$message, $params) {
+  $options = array(
+    'langcode' => $message['langcode'],
+  );
+
+  switch ($key) {
+    case 'resultado':
+      $body = <<<EOF
+    Nombre: {nombre}
+    Apellido: {apellido}
+    Rut: {rut}
+    Email: {email}
+    Teléfono: {telefono}
+EOF;
+
+      if ($params['vars']['op_phone'] === '0') {
+        // tel fijo
+        $telefono = $params['vars']['area'].$params['vars']['sector'].$params['vars']['numero'];
+      } else {
+        // tel movil
+        $telefono = $params['vars']['area_mobile'].$params['vars']['numero'];
+      }
+
+      $body = str_replace(
+        ['{nombre}', '{apellido}', '{rut}', '{email}', '{telefono}'],
+        [$params['vars']['nombre'], $params['vars']['apellido'], $params['vars']['rut'], $params['vars']['email'], $telefono],
+        $body
+      );
+      $message['from'] = \Drupal::config('system.site')->get('mail');
+      $message['subject'] = t('Quiero que me contacten.');
+      $message['body'][] = $body;
+      break;
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function inversiones_theme($existing, $type, $theme, $path) {
+  $theme = [];
+
+  $theme['field__fondo_mutuo'] = [
+    'variables' => array(
+      'source' => NULL,
+      'template' => 'field--fondo-mutuo',
+    ),
+  ];
+
+  $theme['field__fondo_inversion'] = [
+    'variables' => array(
+      'source' => NULL,
+      'template' => 'field--fondo-inversion',
+    ),
+  ];
+
+  $theme['block_fondos_mutuos_security'] = [
+    'variables' => array(
+      'content' => NULL
+    ),
+  ];
+
+  $theme['block_tracking_error_inversiones_security'] = [
+    'variables' => array(
+      'content' => NULL,
+      '#attached' => array('library' => array('gruposecurity/inversiones')),
+      'items' => \Drupal::service('inversiones.services')->getInstance()->trackingError(),
+    ),
+  ];
+
+  $theme['block_valores_cuota_inversiones_security'] = [
+    'variables' => array(
+      'content' => NULL,
+      '#attached' => array('library' => array('gruposecurity/inversiones')),
+      'items' => custom_date_inversiones(\Drupal::service('inversiones.services')->getInstance()->fondosMutuosValoresCuota()),
+    ),
+  ];
+
+  $theme['block_perfil_inversionista_inversiones_security'] = [
+    'variables' => array(
+      'content' => NULL,
+      '#attached' => array('library' => array('gruposecurity/inversiones','inversiones/base')),
+      'result' => \Drupal::service('inversiones.services')->getInstance()->perfilEncuesta(),
+    ),
+  ];
+  $theme['block_simulador_pension_inversiones_security'] = [
+    'variables' => array(
+      'content' => NULL,
+      '#attached' => array('library' => array('gruposecurity/inversiones','inversiones/base')),
+      'result' => \Drupal::service('inversiones.services')->getInstance()->perfilEncuesta(),
+    ),
+  ];
+  $theme['block_canasta_valores_inversiones_security'] = [
+    'variables' => array(
+      'content' => NULL,
+      'canasta' => \Drupal::service('inversiones.services')->getInstance()->canastaValores(),
+    ),
+  ];
+
+  return $theme;
+}
+
+function inversiones_number_format($number, $decimals = 0) {
+
+  if (strpos($number, ",") !== false && strpos($number, ".") === false) {
+    // los numeros del webservice vienen formateados como 12,05 y los necesitamos con "." como separador de decimales
+    $number = str_replace(",", ".", $number);
+  }
+
+  if (is_int($number)) {
+    return number_format($number, 0, ',', '.');
+  }
+
+  return number_format($number, $decimals, ',', '.');
+}
+
+// function for formating custom date trought inversiones service
+function custom_date_inversiones($values) {
+  $new_values = [];
+  foreach ($values as $value) {
+    $new_tabla = [];
+    foreach ($value["tabla"] as $tabla) {
+      $tabla["FechaRef"] = date('d/m/Y', strtotime($tabla["FechaRef"]));
+      $new_tabla[] = $tabla;
+    }
+    $value["tabla"] = $new_tabla;
+    $new_values[] = $value;
+  }
+  return $new_values;
+}
+
+function inversiones_fix_webservice_number($number) {
+  return str_replace(".", "", $number);
+}
+
+function inversiones_replace_number_placeholder($text) {
+  return preg_replace_callback(
+    '/##([a-zA-Z0-9\.\$]*)##/',
+    function(array $matches) {
+      return "<strong>".$matches[1]."</strong>";
+    },
+    $text
+  );
+}

@@ -1,0 +1,8 @@
+name: Inversiones Security
+type: module
+description: 'Custom module for Inversiones Security.'
+package: Grupo Security
+core: 8.x
+core_version_requirement: ^8 || ^9
+dependencies:
+  - block

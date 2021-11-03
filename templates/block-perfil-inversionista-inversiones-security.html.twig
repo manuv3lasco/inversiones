@@ -1,0 +1,45 @@
+<div class="coh-container-boxed coh-style-contenedor-base-boxed c-simulation-steps">
+  <div class="container-fluid">
+    {% if result %}
+      {% for pregunta in result.Encuesta %}
+        <div class="c-simulation-steps__single">
+          <div class="c-simulation-steps__current">Paso {{ pregunta.NumeroPregunta }}/12</div>
+          <h3>{{ pregunta.Pregunta}}</h3>
+          <div class="coh-row-inner js-c-simulation-steps-body">
+            <div class="coh-column coh-col-md-12">
+              <p>Selecciona una opción</p>
+            </div>
+            {% for alternativa in pregunta.Alternativas %}
+              <div class="coh-col-sm-12 coh-col-xl-3">
+                <div class="c-simulation-steps__item">
+                  <p data-equalize="desc_{{ pregunta.NumeroPregunta }}">{{ alternativa.Descripcion }}</p>
+                  <a class="o-btn o-btn--primary o-btn--steps js-selection" data-answer="{{ pregunta.NumeroPregunta }};{{ alternativa.Alternativa }}">Seleccionar</a>
+                  <div class="c-simulation-steps__active js-selection-active"><i class="fa fa-check-circle"></i></div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      {% endfor %}
+      <div class="c-simulation-steps__single u-text_center"><a class="o-btn o-btn--primary js-profile-btn-result">Continuar</a></div>
+    {% else %}
+        <div class="message">'No fue posible acceder a la informacion solicitada. Por favor, reintente en unos instantes.'</div>
+    {% endif %}
+  </div>
+</div>
+<div id="result">
+</div>
+<div class="container">
+  <div class="row">
+    <div class="offset-md-2 col-md-8">
+      <div id="message" style="display:none;">
+        <div class="o-message o-message--success u-mt80 u-mb30">
+          <div class="o-message__icon"><i class="fa fa-check"></i></div>
+          <div class="u-mt20"><strong class="o-message__text--primary o-message__text--highlight"><span id="user"></span>&nbsp Gracias por completar tus datos.</strong>
+            <p class="o-message__text o-message__text--default"> Nos pondremos en contacto a la brevedad para asesorarte en tus inversiones. </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

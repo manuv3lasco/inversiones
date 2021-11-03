@@ -1,0 +1,53 @@
+<div class="coh-col-md-12">
+  <div class="row">
+    {#<div class="col-md-8">
+      <h3 class="o-title o-title--strong u-pt10 u-mb30">Evolución Valor Cuota</h3>
+    </div>#}
+
+    <div class="coh-col-md-4">
+      <input type="hidden" name="idFondo" value="{{ source.id_fondo }}" />
+      <div class="o-dropdown o-dropdown--column">
+        <select class="o-dropdown__select" name="serie">
+          {% for serie in source.series %}
+            <option value={{ serie.codigo }}>{{ serie.nombre }}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12">
+      <div id="c-graphic_fund" class="c-graphic c-graphic--full">
+        <div class="c-graphic__lines">
+          <h2 class="c-graphic__title">Valores Cuota</h2>
+          <div class="tab">
+            <a class="active" href="#tab1" plazo="mensual">
+              <div class="title">Mensual</div>
+              <div class="details down">
+                <small>Último <br>mes</small>
+              </div>
+            </a>
+            <a href="#tab2" plazo="anual">
+              <div class="title">Anual</div>
+              <div class="details up">
+                <small>Año <br> en curso</small>
+              </div>
+            </a>
+            <a href="#tab3" plazo="ultimos_meses">
+              <div class="title">Últimos 12 meses</div>
+              <div class="details down">
+                <small>Últimos <br> 12 meses</small>
+              </div>
+            </a>
+          </div>
+          <div class="u-clearfix"></div>
+          <div class="content-tabs">
+            <div class="item_tab" id="tab1">
+              <div id="graphic_{{ source.id_fondo }}"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

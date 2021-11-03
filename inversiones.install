@@ -1,0 +1,17 @@
+<?php
+
+use Drupal\Core\Database\Database;
+
+/**
+ * Implements hook_update_N().
+ */
+function inversiones_update_8002(&$sandbox) {
+
+  // Changing the name coloumn of if fondo mutuo field value
+  $schema = Database::getConnection()->query("ALTER TABLE node__field_id_fondo_mutuo CHANGE field_id_fondo_mutuo_fondo_mutuo field_id_fondo_mutuo_value VARCHAR(225)");
+  $schema = Database::getConnection()->query("ALTER TABLE node_revision__field_id_fondo_mutuo CHANGE field_id_fondo_mutuo_fondo_mutuo field_id_fondo_mutuo_value VARCHAR(225)");
+
+  // Changing the name coloumn of if fondo mutuo field value
+  $schema = Database::getConnection()->query("ALTER TABLE node__field_id_fondo_inversion CHANGE field_id_fondo_inversion_fondo_inversion field_id_fondo_inversion_value VARCHAR(225)");
+  $schema = Database::getConnection()->query("ALTER TABLE node_revision__field_id_fondo_inversion CHANGE field_id_fondo_inversion_fondo_inversion field_id_fondo_inversion_value VARCHAR(225)");
+}

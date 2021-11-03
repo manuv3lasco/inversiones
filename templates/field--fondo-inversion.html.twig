@@ -1,0 +1,22 @@
+<div class="coh-col-md-12" id="js-valores-diarios" data-idfondo="{{ source.id }}" data-fecha="{{ "now"|date("Ymd") }}">
+
+  <div class="row">
+    {#<div class="col-md-8">
+      <h3 class="o-title o-title--strong u-pt10 u-mb20">Valores Diarios</h3>
+    </div>#}
+    <div class="coh-col-md-4">
+      <div class="o-form__field -filter u-mt10">
+        <input class="o-form__input o-form__input--datepicker js-datepicker js-datepicker-fecha-diarios" type="text" placeholder="Selecciona día">
+      </div>
+    </div>
+  </div>
+  <div class="loading"><div class="lds-css"><div class="lds-dual-ring"><div></div></div></div></div>
+  <div class="row">
+    <div class="coh-col-md-12">
+      <div class="js-show u-hidden">
+        <div class=" js-ajax">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

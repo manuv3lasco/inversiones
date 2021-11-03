@@ -1,0 +1,28 @@
+{% if items.message %}
+  <p>No fue posible acceder a la informacion solicitada. Por favor, reintente en unos instantes.</p>
+{% else %}
+  {% for item in items %}
+    <h2>{{ item.titulo }}</h2>
+    <table class="c-table c-table--basic c-table--responsive">
+
+      <thead class="c-table__head">
+      <tr>
+        {% for encabezado in item.encabezado %}
+        <th class="u-text_center">{{ encabezado }}</th>
+        {% endfor %}
+      </tr>
+      </thead>
+      <tbody class="c-table__body">
+        {% for tabla in item.tabla %}
+          <tr>
+            <td class="u-text_center">{{ tabla.NombreFondo }}</td>
+            <td class="u-text_center">{{ tabla.NombreSerie }}</td>
+            <td class="u-text_center">{{ tabla.Moneda }}</td>
+            <td class="u-text_center">{{ tabla.ValorCuota|number_format(4, ',', '.')|replace({",0000" : ""}) }}</td>
+            <td class="u-text_center">{{ tabla.FechaRef }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% endfor %}
+{% endif %}
